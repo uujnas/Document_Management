@@ -1,0 +1,36 @@
+{% extends "dash.html" %}
+{% block content %}
+<html>
+<title>DMS|Search</title>
+
+<div class="container">
+<!--<h2>View the document</h2>-->
+<br>
+<em>View the document</em>
+<table border="1">
+    <thead>
+      <td>Name:</td>
+      <td>uploaded date:</td>
+	  <td>Description:</td>
+	  <td>File:</td>
+    </thead>
+	<tbody>
+      
+	  
+        <td>{{ item.Name }}</td>
+        <td>{{ item.uploaded_at }}</td>
+	    <td>{{ item.Description }}</td>
+	    <td><embed src="{{item.file.url}}" type="application/pdf" height="550px" width="500"></td>
+        
+		 
+        
+      
+        
+    </tbody>
+  </table>
+    <td><a href="{% url 'upload:Editfiles' item.pk %}">Edit</a></td>
+  
+</div>
+</html>
+
+{% endblock %}

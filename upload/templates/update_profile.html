@@ -1,0 +1,119 @@
+{% extends "dash.html" %}
+{% block content %}
+
+<html>
+<head>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0px 9px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+</head>
+  <h2>Update profile</h2>
+  <table border="0">
+    <thead>
+      <tr>
+        <th>User ID:</th>
+		<td>{{ request.user.id }}</a></td>
+		</tr>
+		<tr>
+        <th>Username:</th>
+		<td>{{request.user.username }}</td>
+		</tr>
+		<tr>
+        <th>Full name:</th>
+		<td>{{ request.user.first_name }} {{request.user.last_name}}</td>
+		<tr>
+		<th>Email address:</th>
+		<td>{{request.user.email}}</td>
+		</tr>
+	    <tr>
+		
+    </thead>
+  </table>
+  	<a href="{%url 'accounts:change_password' %}" class="button">Change password</a>
+	
+<form action="/upload/view_profile/" method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+	
+  <table style="width:90%">
+   <tr>
+      <td> Profile image:<br>  {{ userdetail_form.Img }}  </td>  
+      
+    </tr>
+   <tr>
+      <td> Father's Name:<br>  {{ userdetail_form.father_name }}  </td>  
+      <td> Mother's Name: <br>  {{ userdetail_form.mother_name }}</td>
+    </tr>
+    <tr>
+      <td> Grandfather Name:<br>  {{ userdetail_form.grandfather_name }}  </td>  
+      <td> Spouse Name:<br>   {{ userdetail_form.spouse_name }}</td>
+    </tr>    
+    <tr>
+      <td> citizenship_no: <br>  {{ userdetail_form.citizenship_no }}  </td>  
+      <td> issued district: <br>  {{ userdetail_form.issued_district }}</td>
+	  </tr>
+	<tr>
+	  <td>  issue date: <br>  {{ userdetail_form.issue_date }}</td>
+    </tr>
+    <tr>
+      <td> Temporary address:<br>  {{ userdetail_form.temporary_address }}  </td>  
+      <td> Permanent address: <br>  {{ userdetail_form.permanent_address }}</td>
+    </tr>
+	<tr >
+      <td> Mobile no:<br>  {{ userdetail_form.Mobile_no }}  </td>  
+      <td> landline: <br> {{ userdetail_form.landline }}</td>
+    </tr>
+	{{ userdetail_form.errors }}
+    {{ userdetail_form.non_field_errors }}
+	<table style="width:90%" border="1">
+	<em>Education details</em>
+        <tr>
+		  <td> </td>
+          <td>Board Name</td>
+          <td>Passed year</td>
+		  <td>Division & percentage</td>
+        </tr>
+        <tr>
+          <td>SLC/SEE</td>
+          <td>{{ userdetail_form.secondary_school }}</td>
+		  <td>{{ userdetail_form.passed_year1 }}</td>
+		  <td>{{ userdetail_form.division_percentage1 }}</td>
+        </tr>
+		<tr>
+          <td>Intermediate</td>
+          <td>{{ userdetail_form.intermediate_school }}</td>
+		  <td>{{ userdetail_form.passed_year2 }}</td>
+		  <td>{{ userdetail_form.division_percentage2 }}</td>
+        </tr>
+		<tr>
+          <td>Bachelor</td>
+          <td>{{ userdetail_form.Bachelor }}</td>
+		  <td>{{ userdetail_form.passed_year3 }}</td>
+		  <td>{{ userdetail_form.division_percentage3 }}</td>
+        </tr>
+		<tr>
+          <td>Masters</td>
+          <td>{{ userdetail_form.Masters }}</td>
+		  <td>{{ userdetail_form.passed_year4 }}</td>
+		  <td>{{ userdetail_form.division_percentage4 }}</td>
+        </tr>
+      </table>
+     
+   
+  </table>
+  <br>
+    <button type="submit" class="button">submit</button>
+  </form>
+  
+</html>
+{% endblock %}

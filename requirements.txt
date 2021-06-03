@@ -1,0 +1,14 @@
+Django==2.0.1
+gunicorn==19.7.1
+pytz==2017.3
+django-currentuser==0.5.0
+django-pyodbc-azure==2.1.0.0
+django-widget-tweaks==1.4.8
+pillow==6.2.1
+pylint==2.4.4
+pyodbc==4.0.27
+pytz==2019.3
+virtualenv==16.7.7
+virtualenvwrapper-win==1.2.5
+wfastcgi==3.0.0
+

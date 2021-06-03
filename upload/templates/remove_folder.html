@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'dash.html '%}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="main p-5 m-5 text-center">
+
+
+    <h5 class="text-dark pt-5 pd-1"><b>Folder is deleted</b></h5>
+
+    {% if messages %}
+   {% for message in messages %}
+	   <h4 class="text-success">  {{ message }}</h4>
+       {% endfor %}
+    {% endif %}
+
+</div>
+{% endblock %}
+</body>
+</html>

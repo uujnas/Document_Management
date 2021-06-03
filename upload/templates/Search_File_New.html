@@ -1,0 +1,79 @@
+{% extends "dash.html" %}
+{% load static %}
+{% block content %}
+<html>
+<title>DMS|Search</title>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0px 9px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+ select {
+        width:100px;
+		margin: 10px;
+    }
+ select:focus {
+        min-width: 100px;
+        width: auto;
+    }
+</style>
+<div class="container">
+<!--<h1>Files in the system are:</h1>-->
+<br>
+<form action="/upload/searchfile/" method="GET">
+    File Name: <input type="text" name="Name" />
+	From Date: <input type="date" name="from_date" />
+	To Date: <input type="date" name="to_date" />
+    <button type="submit" class="button">search</button>
+   </form>
+ <form action="/upload/filterfiles/" method="GET">   
+   Filter Files: <select name="filterfiles">  
+        <option value="all"> All files </option>
+		<option value="pdf"> PDF </option>
+        <option value="word"> Word </option>
+		<option value="image"> Image </option>
+		<option value="excel"> Excel </option>
+     </select> 
+	 <button type="submit" class="button">Filter</button> <br>
+</form>
+<em>Files in the system are:</em>
+    <div class=" w-75" align="center">
+
+    <table class="table  ml-5 text-center shadow bg-white rounded  ml-5 " cellpadding="" cellspacing="" >
+    <thead>
+      <tr>
+        <th>File Name</th>
+        <th>File</th>
+        <th>uploaded date</th>
+		<th>Edit</th>
+		<th>View</th>
+		<th>Download</th>
+      </tr>
+    </thead>
+	<tbody>
+      {% for f in results %}
+        <tr>
+          <td>{{ f.name }}</a></td>
+          <td>{{ f.file }}</td>
+          <td>{{ f.uploaded_at }}</td>
+          <td><a href="{% url 'upload:Editfiles' f.pk %}"></a>Edit</td>
+		  <td><a href="{% url 'upload:Viewfiles' f.pk %}"></a>View</td>
+		  <td><a href="{% url 'upload:Downloadfiles' f.pk %}"></a>Download</td>
+		  <!--<td><embed src="{{f.File.url}}" type="application/pdf" height="100px" width="100px"></td>-->
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+    </div>
+</div>
+</html>
+
+{% endblock %}

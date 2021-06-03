@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends 'dash.html' %}
+{% load static %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="main p-5">
+
+    <h5>available files in  <b> {{detail.directory}}</b>  </h5><br>
+    <div class="container-fluid m-0 p-0">
+        <div class="row">
+                 {% for file in file %}
+            <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+               <p class=""> {{file.file}}
+               </p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                   <a href="{{file.file.url}}" class="ml-5 mr-5">download</a>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+</div>
+</body>
+</html>

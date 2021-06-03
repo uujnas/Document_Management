@@ -1,0 +1,7 @@
+<h2>Add user</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ AdduserForm.as_p }}
+	<!--{{ location_form.as_p }}-->
+    <button type="submit">submit</button>
+  </form>

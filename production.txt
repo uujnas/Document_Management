@@ -1,0 +1,28 @@
+Things to remember for production of django on IIS
+1. Install python 3.6.5 in c:\python36
+2. create one directory and pip install virtulenvwrapper-win
+3. mkvirtualenv mywebsite
+4. workon mywebsite
+5. pip install django==2.1
+6. pip install wfastcgi and remember the installed path
+7. wfastcgi-enable
+
+To add sql database 
+1. we need to install sql server 2017
+2. After that install Microsoft Sql Server Management studio 2017
+2. Install pip install django-pyodbc-azure
+3. Add database name and password in settings.py
+
+
+
+After doing this now time to congigure windows IIS server
+1. Install IIS with CGI installed
+2. copy the project in c:\'project' and Add new website with unused port number 
+3. Under the created site create new handler module with fastcgimodule and uncheck invoke
+4. Add it to fastcgisetting, provide path and arguement, provide the environment variables
+   DJANGO_SETTINGS,PYTHONPATH,WSGI_APPLICATION as well
+5. Manage the same setting in web.config file in project directory
+6. Provide permission of python36 for IIS AppPool\'project' 
+7. provide write permission if anything has to be uploaded
+8. Allow firewall inbound rule in the repective port for other users can access it
+9. Add server ip to the allowed host and make debug = False

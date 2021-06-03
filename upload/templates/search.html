@@ -1,0 +1,86 @@
+{% extends "dash.html" %}
+{% block content %}
+
+<html>
+<title>DMS|Search</title>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0px 9px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+ select {
+        width:100px;
+		margin: 10px;
+    }
+ select:focus {
+        min-width: 100px;
+        width: auto;
+    }
+</style>
+<div class="container">
+<!--<h1>Files in the system are:</h1>-->
+<br>
+<form action="/upload/searchfile/" method="GET">
+    File Name: <input type="text" name="Name" />
+	From Date: <input type="date" name="from_date" />
+	To Date: <input type="date" name="to_date" />
+	<button type="submit" class="button">search</button> <br>
+
+   </form>
+<form action="/upload/filterfiles/" method="GET">   
+   Filter Files: <select name="filterfiles" >  
+        <option value="all"> All files </option>
+		<option value="pdf"> PDF </option>
+        <option value="word"> Word </option>
+		<option value="image"> Image </option>
+		<option value="excel"> Excel </option>
+     </select> 
+	 <button type="submit" class="button">Filter</button> <br>
+</form> 
+<em>Files in the system are: </em>
+<!--{{ user.profile.Role_id }} {{ user.groups.all }}-->
+<table style="width:90%" border="1">
+    <thead>
+      <tr>
+        <th>File Name</th>
+        <th>File</th>
+        <th>uploaded date</th>
+		<th>Edit</th>
+		<th>View</th>
+		<th>Download</th>
+      </tr>
+    </thead>
+	<tbody>
+      {% for f in c %}
+        <tr>
+          <td>{{ f.name }}</a></td>
+          <td>{{ f.file }}</td>
+          <td>{{ f.uploaded_at }}</td>
+		  {% if user.profile.Role_id != 2 %} 
+          <td><a href="{% url 'upload:Editfiles' f.pk %}">Edit</td>
+		  {% else %}
+		  <td></td>
+		  {% endif%}
+		  <td><a href="{% url 'upload:Viewfiles' f.pk %}">View</td>
+		  <td><a href="{% url 'upload:Downloadfiles' f.pk %}">Download</td>
+		  <!--<td><embed src="{{f.File.url}}" type="application/pdf" height="100px" width="100px"></td>  -->
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">No Files in the database. <a href="{% url 'upload:files' %}">Add the first File</a>.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</html>
+
+{% endblock %}

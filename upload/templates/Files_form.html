@@ -1,0 +1,30 @@
+{% extends "dash.html" %}
+{% block content %}
+
+<html>
+<title>DMD|Edit</title>
+<div class="container">
+
+ <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+	<!--<table border="1">-->
+	<table>
+	<br>
+    {{file_form.as_p}}
+	{{ file_form.errors }}
+    {{ file_form.non_field_errors }}
+<!--	<p><label for="id_File">File:</label>
+    <embed src="{{item.File.url}}" type="application/pdf" height="500px" width="500px"></p>-->
+	
+	</table>
+	<br>
+	<!--</table>-->
+    <input type="submit" value="upload">
+</form>
+
+</div>
+
+<!--<embed src="{{item.File.url}}" type="application/pdf" height="700px" width="500">-->
+
+</html>
+{% endblock %}

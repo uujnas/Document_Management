@@ -1,0 +1,10 @@
+<h3> Display total users list: </h3>
+
+  <p><b>Display:</b> <br>{{sp_user_list}}</p>
+
+  
+    
+    {% for i in sp_user_list %}
+      ID: {{i.1}} <br>
+      Firstname: {{i.2}} <br><br>
+    {% endfor %}

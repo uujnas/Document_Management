@@ -1,0 +1,19 @@
+
+<html>
+<title>Edit</title>
+<div class="container">
+ <form action="/upload/files/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+	<!--<table border="1">-->
+	
+	<br>
+    {{form.as_p}}
+	{{form.Name.value}}
+	
+	<br>
+	<!--</table>-->
+    <input type="submit" value="upload">
+</form>
+
+</div>
+</html>

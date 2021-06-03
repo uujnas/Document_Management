@@ -1,0 +1,39 @@
+
+<html>
+<title>Edit</title>
+<div class="container">
+<h1>Name: {{ f.Name }} </h1>
+  <p>Description: {{ f.Description  }}</p>
+ <form action="/upload/files/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+	<table border="1">
+     
+      <tr>
+        <th>{{ ff.Name }}</th>
+        <td>
+          {{ f.name }}
+        </td>
+      </tr>
+
+      <tr>
+	    <input id="id_Description" name="Description" type="text" value="{{ ff.Description }}" required>
+        <th>{{ ff.Description }}</th>
+        <td>
+          {{ f.Description }}
+        </td>
+      </tr>
+
+      <tr>
+        <th>{{ ff.File }}</th>
+        <td>
+          {{ f.File }}
+          
+        </td>
+      </tr>
+
+  </table>
+    <input type="submit" value="Submit">
+</form>
+
+</div>
+</html>

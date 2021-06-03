@@ -1,0 +1,25 @@
+{% extends 'dash.html' %}
+
+{% block content %}
+<h2> Create new user</h2>
+
+{{ error }}
+<form  method="POST" action="/upload/signup/">
+{% csrf_token %}
+
+Username: <br />
+<input type="text" name="username" />
+<br />
+<!--First Name: <br />
+<input type="text" name="first_name" />
+<br />
+Last Name: <br />
+<input type="text" name="last_name" />
+<br />
+Email: <br />
+<input type="email" name="email" /><br />-->
+{{ form_adduser.as_p }} 
+<input class="btn btn-primary" type="submit" value="Submit" />
+</form>
+
+{% endblock %}

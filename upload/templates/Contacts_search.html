@@ -1,0 +1,58 @@
+{% extends "dash.html" %}
+{% block content %}
+<html>
+<title>DMS|Contacts</title>
+<head>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+</head>
+<div class="container">
+<!--<h1>Files in the system are:</h1>-->
+<br><br>
+<a href="#" class="button">Add contacts</a>
+<em>Contacts in the system are:</em>
+<table border="2">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Office Name</th>
+        <th>Mobile1</th>
+		<th>Mobile2</th>
+		<th>Landline</th>
+		<th>Email</th>
+      </tr>
+    </thead>
+	<tbody>
+      {% for f in c.total %}
+        <tr>
+          <td>{{ f.Name }}</a></td>
+          <td>{{ f.Office_name }}</td>
+          <td>{{ f.Mobile_no1}}</td>
+          <td>{{ f.Mobile_no2}}</td>
+		  <td>{{ f.landline_no}}</td>
+		  <td>{{ f.email }}</td>
+		  <!--<td><embed src="{{f.File.url}}" type="application/pdf" height="100px" width="100px"></td>-->
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">No Files in the database. <a href="{% url 'upload:files' %}">Add the first Contact</a>.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</html>
+
+{% endblock %}

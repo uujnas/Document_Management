@@ -1,0 +1,7 @@
+
+<select name="Country" id="id_country" required>
+                <option value="0" > Select </option>
+                {% for obj in Prov %}
+                <option value="{{ obj.id }}">{{ obj.name }} </option>
+                {% endfor %}
+            </select>

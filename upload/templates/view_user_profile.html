@@ -1,0 +1,102 @@
+{% extends "dash.html" %}
+{% block content %}
+
+<html>
+
+  <h3>User profile</h3>
+  <div class="w3-col s4">
+	{% if usr.userdetails.Img %}  
+	<img src="{{usr.userdetails.Img.url}}" class="w3-circle w3-margin-right" style="width:86px">"
+<!--	-->
+	{% endif %}
+    </div>
+	<br>
+  <table border="0">
+    <thead>
+      <tr>
+        <th>User ID:</th>
+		<td>{{ usr.id}}</a></td>
+		</tr>
+		<tr>
+        <th>Username:</th>
+		<td>{{usr.username}}</td>
+		</tr>
+		<tr>
+        <th>Full name:</th>
+		<td>{{ usr.first_name }} {{usr.last_name}}</td>
+		<tr>
+		<th>Email address:</th>
+		<td>{{usr.email}}</td>
+		</tr>
+		
+		
+    </thead>
+  </table>
+	{% for i in usr_profile %}
+  <table style="width:90%">
+   <tr>
+      <th> Father's Name:</th>
+	  <td>	{{ i.father_name }}  </td>  
+      
+	  <th> Mother's Name:</th>  
+	  <td> {{ i.mother_name }}</td>
+    </tr>
+    <tr>
+      <th> Grandfather Name: </th> <td>  {{ i.grandfather_name }}  </td>  
+      <th>Spouse Name: </th>    <td>   {{ i.spouse_name }}</td>
+    </tr>    
+    <tr>
+      <th> citizenship_no:</th>  <td>    {{ i.citizenship_no }}  </td>  
+      <th> issued district:</th> <td> {{ i.issued_district }}</td>
+	  </tr>
+	<tr>
+	  <th> issue date:</th> <td>   {{ i.issue_date }}</td>
+    </tr>
+    <tr>
+    <th>    Temporary address:</th>  <td>  {{ i.temporary_address }}  </td>  
+     <th>   Permanent address:</th>  <td>  {{ i.permanent_address }}</td>
+    </tr>
+	<tr >
+     <th> Mobile no:</th>  <td>  {{ i.Mobile_no }}  </td>  
+      <th> landline:</th> <td>    {{ i.landline }}</td>
+    </tr>
+	
+	<table style="width:90%" border="1">
+	<em>Education details</em>
+        <tr>
+		  <td> </td>
+          <th>Board Name</th>
+          <th>Passed year</th>
+		  <th>Division & percentage</th>
+        </tr>
+        <tr>
+          <th>SLC/SEE</th>
+          <td>{{ i.secondary_school }}</td>
+		  <td>{{ i.passed_year1 }}</td>
+		  <td>{{ i.division_percentage1 }}</td>
+        </tr>
+		<tr>
+          <th>Intermediate</th>
+          <td>{{ i.intermediate_school }}</td>
+		  <td>{{ i.passed_year2 }}</td>
+		  <td>{{ i.division_percentage2 }}</td>
+        </tr>
+		<tr>
+          <th>Bachelor</th>
+          <td>{{ i.Bachelor }}</td>
+		  <td>{{ i.passed_year3 }}</td>
+		  <td>{{ i.division_percentage3 }}</td>
+        </tr>
+		<tr>
+          <th>Masters</th>
+          <td>{{ i.Masters }}</td>
+		  <td>{{ i.passed_year4 }}</td>
+		  <td>{{ i.division_percentage4 }}</td>
+        </tr>
+      </table>
+     
+   
+  </table>
+    {% endfor %}
+</html>
+{% endblock %}

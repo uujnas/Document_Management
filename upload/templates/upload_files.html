@@ -1,0 +1,36 @@
+{% extends "dash.html" %}
+{% block content %}
+<html>
+<title>DMS|Upload</title>
+<style> 
+input[type=text] {
+  width: 110%;
+}
+input:focus {
+  background-color: lightblue;
+}
+input[type=submit]{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+<h2 class="pt-5">Upload your files here</h2>
+<div class="container">
+ <form action="/upload/files/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+	<table  class="table table-responsive">
+
+	{{file_form.as_table}}
+	<br>
+	</table>
+   <input type="submit" value="Upload" class="p-1 ml-1">
+</form>
+
+</div>
+</html>
+{% endblock %}

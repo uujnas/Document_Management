@@ -1,0 +1,38 @@
+{% extends "dash.html" %}
+{% block content %}
+<html>
+<title>DMS|Upload</title>
+<style> 
+input[type=text] {
+  width: 110%;
+}
+input:focus {
+  background-color: lightblue;
+}
+input[type=submit]{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+<h2>Add new contact</h2>
+<div class="container">
+
+ <form action="/upload/addContacts/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+	<table style="width:40%">
+	<!--<table border="1">-->
+	
+	{{contact_form.as_table}}
+		<!--</table>-->
+		</table>
+    <input type="submit" value="Submit">
+</form>
+
+</div>
+</html>
+{% endblock %}

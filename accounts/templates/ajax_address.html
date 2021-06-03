@@ -1,0 +1,12 @@
+<h2>Address</h2>
+
+  <form method="post" id="MunicipalityForm" address-url="{% url 'DMS:ajax_address' %}" novalidate>
+    {% csrf_token %}
+    <table>
+      {{ addressform.as_table }}
+    </table>
+    <button type="submit">Save</button>
+    
+  </form>
+
+  

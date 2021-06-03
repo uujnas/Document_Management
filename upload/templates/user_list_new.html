@@ -1,0 +1,58 @@
+<br>
+{% extends "dash.html" %}
+{% block content %}
+<head>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0px 9px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+</head>
+<p><a href="{% url 'upload:signup' %}" class="button">Create new user</a></p><br>
+<em> All users in the system </em>
+
+  
+	<table style="width:90%" class="table  ml-5 text-center shadow bg-white rounded  ml-5 ">
+    <thead>
+      <tr class="ml-2">
+        <th>ID</th>
+        <th>Username</th>
+        <th>first name</th>
+		<th>last name</th>
+		<th>Role</th>
+		<th>Email address</th>
+		<th>View Attendance</th>
+		<th>View Leave</th>
+		
+	  </tr>
+    </thead>
+	{{ us_er.total.Role_id}}
+	<tbody>
+      {% for i in us_er.total %}
+        <tr>
+          <td>{{ i.id }}</a></td>
+          <td><a href="{% url 'upload:view_user_profile' i.pk %}">{{i.username }}</a></td>
+          <td>{{ i.first_name }}</td>
+          <td>{{i.last_name}}</td>
+		  <td>{{ i.profile.Role }}</td>
+		  <td>{{i.email}}</td>
+		<!--  <td>{{i.Role_id}}</td>-->
+		  <td><a href="{% url 'cal:view_attendance' i.pk %}">Attendance</a></td>
+		  <td><a href="{% url 'cal:view_leave' i.pk %}">View Leave</a></td>
+		<!--  <td><a href="{% url 'upload:modify_user' i.pk %}">View Leave</a></td>
+		  <td><embed src="{{f.File.url}}" type="application/pdf" height="100px" width="100px"></td>-->
+        </tr>
+      {% endfor %}
+	  
+    </tbody>
+	</table>
+	{% endblock %}

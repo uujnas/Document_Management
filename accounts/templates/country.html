@@ -1,0 +1,16 @@
+<h2>Add Address</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ addressform.as_p }}
+	<!--{{ location_form.as_p }}-->
+    <button type="submit">submit</button>
+	
+  </form>
+ 
+ <!--<select name="Country" id="id_country" required>
+                <option value="0" > Select </option>
+                {% for obj in Prov %}
+                <option value="{{ obj.name }}">{{ obj.name }} </option>
+                {% endfor %}
+            </select>
+			-->

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+{% extends 'dash.html '%}
+
+{% block content %}
+{% load static %}
+<html>
+<head>
+
+  <title>create folder</title>
+
+<style>
+.content,a{
+margin-left:10px;
+
+}
+
+.topText {
+  font-size:18px;
+  font-weight:bold;
+}
+.selectSection {
+	display: grid;
+<!--
+	grid-template-columns: repeat( 6, 1fr);
+-->
+	justify-content: center;
+	text-align: center;
+  margin-top: 10px;
+}
+.selectSection button {
+  font-size: 16px;
+	background-color: #f1f1f1;
+	box-shadow:#f1f1f1;
+	margin-left: 10px;
+	border: 0;
+  padding: 3px;
+}
+.selectSection button:hover {
+	cursor: pointer;
+}
+
+
+/* hides every element except the first */
+.content:not(:first-child) {
+	display: none;
+}
+.contentSection {
+	margin: 10px;
+	display: block;
+	color: #666;
+	display: grid;
+}
+
+#form1{
+  padding: 75px;
+  border: 4px solid #f1f1f1;
+  background: #fff;
+  display: none;
+  width:65%;
+}
+
+.folder_list{
+margin-left:90px;
+margin-top:25px;
+}
+
+
+
+# Desktop
+@media only screen and (min-width: 992px){
+.selectSection {
+	grid-template-columns: repeat( 6, 1fr);
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+                                            <!--  Create Folder-->
+
+          <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary pull-right m-5" data-toggle="modal" data-target="#exampleModal" >
+      Create new folder
+      </button>
+
+<form action="/upload/folder/" method="POST" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">                                                      form>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create new folder</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Enter Folder Name
+          <input type="text" name="directory"  id="FileUpload folder_name" onchange="selectFolder(event)" class="form-control">
+          </p>
+          <br/>
+          <input type="submit" name="folder_button" id="folder_button" class="btn btn-info" value="Create">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+<hr/>
+
+                    <!-- Upload file-->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary pull-right mt-4" data-toggle="modal" data-target="#exampleModalCenter">
+Upload file
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Upload File</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <form action="/upload/add_file/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+               <label>Folder <span class="text-danger" style="font-size:25px;"><b>* </b></span><b>: </b>{{form.dir}} </label>
+               <label>File  <span class="text-danger" style="font-size:25px;"><b>*</b> </span><b> : </b>{{form.file}}</label><br><br>
+            <button type="submit" class="btn btn-primary   mt-2"> upload file </button>
+           </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="contentSection">
+              {% for list_folder in folder %}
+        <div class="content text-nowrap" data-number="{{list_folder.id}}">
+         <p class="text-nowrap pt-5">
+<!--            <a href="{% url 'upload:folder_detail' list_folder.id %}" class="text-success"><b>View</b></a>-->
+           <a href="{% url 'upload:remove_folder' list_folder.id %}" class="text-danger"><b>Delete</b></a>
+           <a href="{% url 'upload:rename_folder' list_folder.id %}" class="text-primary"><b>Rename</b></a>
+         </p>
+        </div>
+
+            {% endfor %}
+    </div>
+
+                                             {% if messages %}
+                                             {% for message in messages %}
+                                             <h5 class="text-danger text-center">  {{ message }}</h5>
+                                             {% endfor %}
+                                             {% endif %}
+
+             <p class="text-nowrap text-center"><b>Folders appears here:</b></p>
+                 <div class="selectSection ">
+                <div class="container">
+                    <div class="row">
+
+                 {% for list_folder in folder %}
+                    <button type="button" data-number="{{list_folder.id}}" class="col-md-4 col-sm-4 col-lg-2 folder_list" >
+                        <img src="{% static 'images/folder.png' %}" id="{{list_folder.directory|safe}}" class="mx-5" height="60" width="60">
+                        <a href="{% url 'upload:folder_detail' list_folder.id %}" class="mx-5 text-nowrap" > {{list_folder.directory}}</a>
+                {% endfor %}
+            </div>
+           </div>
+
+
+
+</div>
+</body>
+
+
+</html>
+
+
+<script>
+// change active class, show the clicked element only and hide the others
+
+
+// grab all the buttons
+let Buttons = document.querySelectorAll(".selectSection button");
+
+// loop through the buttons using for..of
+for (let button of Buttons) {
+  // listen for a click event
+  button.addEventListener('click', (e) => {
+    // et = event target
+    const et = e.target;
+    // slect active class
+    const active = document.querySelector(".active");
+    // check for the button that has active class and remove it
+    if (active) {
+      active.classList.remove("active");
+    }
+    // add active class to the clicked element
+    et.classList.add("active");
+
+    // select all classes with the name content
+    let allContent = document.querySelectorAll('.content');
+
+    // loop through all content classes
+    for (let content of allContent) {
+      // display the content if the class has the same data-attribute as the button
+      if(content.getAttribute('data-number') === button.getAttribute('data-number')) {
+        content.style.display = "block";
+       }
+      // if it's not equal then hide it.
+      else {
+        content.style.display = "none";
+       }
+     }
+  });
+}
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+{% endblock %}
+
+

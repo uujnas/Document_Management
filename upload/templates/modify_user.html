@@ -1,0 +1,41 @@
+{% extends "dash.html" %}
+{% block content %}
+{%load static%}
+<html>
+  <h2>Modify user</h2>
+  <table border="0">
+    <thead>
+      <tr>
+        <th>User ID:</th>
+		<td>{{ usr.ID }}</a></td>
+		</tr>
+		<tr>
+        <th>Username:</th>
+		<td>{{usr.Name }}</td>
+		</tr>
+		<tr>
+        <th>first name:</th>
+		<td>{{ usr.first_name }}</td>
+		</tr>
+		<tr>
+		<th>last name:</th>
+		<td>{{usr.last_name}}</td>
+		</tr>
+		<tr>
+		<th>Email address:</th>
+		<td>{{usr.email}}</td>
+		
+	  </tr>
+	  
+    </thead>
+	
+	</table>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+	{{form_adduser.as_p}}
+	<!--{{ location_form.as_p }}-->
+    <button type="submit">submit</button>
+  </form>
+</html>
+{% endblock %}

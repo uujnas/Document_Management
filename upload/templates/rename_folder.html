@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'dash.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rename Folder</title>
+</head>
+<body>
+{% block content %}
+
+<div class="container p-5">
+    <div class="row">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+<!--                <p>Rename Folder:<input type="text" name="destination"  class="form-control"></p>-->
+            <input type="submit" class="btn btn-sm btn-info" value="Rename">
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+</body>
+</html>

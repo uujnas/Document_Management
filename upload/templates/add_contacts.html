@@ -1,0 +1,61 @@
+{% extends "dash.html" %}
+{% block content %}
+<html>
+<title>DMS|Contacts</title>
+<head>
+<style> 
+input[type=tel],input[type=text] {
+  width: 60%;
+}
+input:focus {
+  background-color: lightblue;
+}
+input[type=submit]{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+</head>
+<br>
+<h4>Add new contact</h4>
+<form  method="POST"  action="{% url 'upload:addContacts'%}" enctype="multipart/form-data"> 
+{% csrf_token %}
+<table style="width:100%">
+<tr>
+<td> Name:<br><input type="text" id="text" name="Name" placeholder="Enter Contact Name"> </td>  <td>   Office name: <br><input type="text" name="Office_name" placeholder="Enter Office Name" ></td>
+</tr>
+<tr>
+<td>Description: <br><input type="text" name="Description" placeholder="Enter Description"></td>
+<td>
+Address: <br>
+<input type="text" name="Address" placeholder="Enter Address"></td>
+</tr>
+
+<tr>
+<td>Mobile1: <br>
+<input type="number" id="phone" name="Mobile_no1" placeholder="Enter primary Mobile number"></td>
+<td>Mobile2: <br>
+<input type="tel" id="phone" name="Mobile_no2" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Enter secondary Mobile number"></td>
+</tr>
+
+<tr>
+<td>landline:<br>
+<input type="tel" id="phone" name="landline_no" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Enter landline number"></td>
+<td>
+Email: <br>
+<input type="text" name="email" placeholder="Enter Email"></td>
+<tr>
+
+</table>
+<br>
+<input type="submit" value="submit" />
+</form>
+
+</html>
+
+{% endblock %}

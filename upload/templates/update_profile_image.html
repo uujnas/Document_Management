@@ -1,0 +1,30 @@
+<br>
+{% extends "dash.html" %}
+{% block content %}
+<head>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0px 9px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+</head>
+<form  method="POST"  action="{% url 'upload:update_profile_image'%}" enctype="multipart/form-data"> 
+{% csrf_token %}
+{{image_form.as_p}}
+<!--Image: <br>
+<input type="file" id="phone" name="image" placeholder="upload file">
+-->
+<br>
+<input class="button" type="submit" value="submit" />
+</form>
+
+	{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "dash.html" %}
+{% block content %}
+
+{% load static %}
+<br>
+{% block title %}Multiple Upload{% endblock %}
+<style> 
+input[type=text] {
+  width: 20%;
+}
+input:focus {
+  background-color: lightblue;
+}
+input[type=submit]{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+{% block javascript %}
+  {# JQUERY FILE UPLOAD SCRIPTS #}
+  <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+  {# PHOTOS PAGE SCRIPTS #}
+  <script src="{% static 'photos/js/basic-upload.js' %}"></script>
+{% endblock %}
+
+{% block photos_content %}
+<form action="/upload/multipleupload/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+	
+	
+	{{ form_name.as_p }}
+	 
+
+    <div style="margin-bottom: 20px;">
+    <button type="button" class="btn btn-primary js-upload-photos">
+      <span class="glyphicon glyphicon-cloud-upload"></span> select files 
+	  
+    </button>
+    <input id="fileupload" type="file" name="file" multiple
+           style="display: none;"
+           data-url="{% url 'upload:basic_upload' %}"
+           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'><br>
+    <table id="gallery" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Files to be upload</th>
+      </tr>
+    </thead>
+    <tbody>
+	    
+      {% for p in photos %}
+	  
+        <tr>
+          <td><a href="{{ p.file.url }}">{{ p.file.name }}</a></td>
+		  <td><a href="#">{{ p.title }}</a></td>
+        </tr>
+		
+		
+      {% endfor %}
+    </tbody>
+  </table>
+	<input type="submit" value="Upload">
+  </div>
+</form>
+  
+{% endblock %}
+{% endblock %}
+

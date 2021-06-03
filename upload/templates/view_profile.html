@@ -1,0 +1,117 @@
+{% extends "dash.html" %}
+{% block content %}
+
+<html>
+<head>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0px 9px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+</head>
+  <h3>Your profile</h3>
+  <div class="w3-col s4">
+	{% if user.userdetails.Img %}  
+	<img src="{{user.userdetails.Img.url}}" class="w3-square " style="width:90px">"
+	<br>
+	<a href="{%url 'upload:update_profile_image' %}" class="button" >Update profile picture</a>
+	{% endif %}
+	<br>
+	<a href="{%url 'accounts:change_password' %}" class="button" >Change password</a>
+    </div>
+	<br>
+  <table border="0">
+    <thead>
+      <tr>
+        <th>User ID:</th>
+		<td>{{ request.user.id }}</a></td>
+		</tr>
+		<tr>
+        <th>Username:</th>
+		<td>{{request.user.username }}</td>
+		</tr>
+		<tr>
+        <th>Full name:</th>
+		<td>{{ request.user.first_name }} {{request.user.last_name}}</td>
+		<tr>
+		<th>Email address:</th>
+		<td>{{request.user.email}}</td>
+		</tr>
+	    <tr>
+		
+    </thead>
+  </table>
+	
+  <table style="width:90%">
+   <tr>
+      <td> Father's Name:	{{ user.userdetails.father_name }}  </td>  
+      <td> Mother's Name:   {{ user.userdetails.mother_name }}</td>
+    </tr>
+    <tr>
+      <td> Grandfather Name:  {{ user.userdetails.grandfather_name }}  </td>  
+      <td> Spouse Name:       {{ user.userdetails.spouse_name }}</td>
+    </tr>    
+    <tr>
+      <td> citizenship_no:   {{ user.userdetails.citizenship_no }}  </td>  
+      <td> issued district:  {{ user.userdetails.issued_district }}</td>
+	  </tr>
+	<tr>
+	  <td>  issue date:   {{ user.userdetails.issue_date }}</td>
+    </tr>
+    <tr>
+      <td> Temporary address:   {{ user.userdetails.temporary_address }}  </td>  
+      <td> Permanent address:   {{ user.userdetails.permanent_address }}</td>
+    </tr>
+	<tr >
+      <td> Mobile no:   {{ user.userdetails.Mobile_no }}  </td>  
+      <td> landline:    {{ user.userdetails.landline }}</td>
+    </tr>
+	
+	<table style="width:90%" border="1">
+	<em>Education details</em>
+        <tr>
+		  <td> </td>
+          <td>Board Name</td>
+          <td>Passed year</td>
+		  <td>Division & percentage</td>
+        </tr>
+        <tr>
+          <td>SLC/SEE</td>
+          <td>{{ user.userdetails.secondary_school }}</td>
+		  <td>{{ user.userdetails.passed_year1 }}</td>
+		  <td>{{ user.userdetails.division_percentage1 }}</td>
+        </tr>
+		<tr>
+          <td>Intermediate</td>
+          <td>{{ user.userdetails.intermediate_school }}</td>
+		  <td>{{ user.userdetails.passed_year2 }}</td>
+		  <td>{{ user.userdetails.division_percentage2 }}</td>
+        </tr>
+		<tr>
+          <td>Bachelor</td>
+          <td>{{ user.userdetails.Bachelor }}</td>
+		  <td>{{ user.userdetails.passed_year3 }}</td>
+		  <td>{{ user.userdetails.division_percentage3 }}</td>
+        </tr>
+		<tr>
+          <td>Masters</td>
+          <td>{{ user.userdetails.Masters }}</td>
+		  <td>{{ user.userdetails.passed_year4 }}</td>
+		  <td>{{ user.userdetails.division_percentage4 }}</td>
+        </tr>
+      </table>
+     
+   
+  </table>
+    
+</html>
+{% endblock %}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<title>DMS|Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/w3.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/w3_fonts.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/w3_awsome_font.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <!-- Calendar CSS -->
+<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"-->
+<!--    crossorigin="anonymous">-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'cal/css/styles.css' %}">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+
+
+</style>
+
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+
+  <button class="w3-bar-item w3-button w3-left w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <a href="{%url 'upload:file_upload'%}" class="w3-bar-item w3-button">Document Management System</a>
+ <a href="{%url 'accounts:logout'%}" class="w3-bar-item w3-right" >Logout</a>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+	{% if user.userdetails.Img %}
+	<img src="{{user.userdetails.Img.url}}" class="w3-circle w3-margin-right" style="width:66px">"
+	{% else %}
+	<img src="{% static 'images/gallery4.jpg'%}" class="w3-circle w3-margin-right" style="width:86px">
+	{% endif %}
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span>Welcome, <strong>{{ user.first_name }}</strong></span><!--
+	  <span>Welcome, <strong>{{ user.profile.Role }}</strong></span><br>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>-->
+    </div>
+  </div>
+  <hr>
+<!--  <div class="w3-container">-->
+<!--    <h5>Dashboard</h5>-->
+<!--  </div>-->
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+    <a href="{%url 'cal:calendar'%}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-calendar fa-fw"></i>  Attendance</a>
+	{% if user.profile.Role_id != 2 %}
+	<a href="{%url 'upload:user_list_new'%}" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>Manage user</a>
+	{% else %}
+	<a href="{%url 'upload:view_profile'%}" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>View Profile</a>
+	{% endif %}
+    <a href="{%url 'upload:search_files'%}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i>  Search file</a>
+	<a href="{%url 'upload:files'%}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-folder-open fa-fw"></i>Upload files</a>
+    <a href="{%url 'upload:basic_upload'%}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-folder-open fa-fw"></i>  Multiple upload</a>
+    <a href="{%url 'upload:drag_and_drop_upload'%}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-folder-open fa-fw"></i>  Drag and Drop upload</a>
+   <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Geo</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
+	<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a><br><br>-->
+<!--    <a href="{%url 'upload:Contacts'%}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-address-book fa-fw"></i>  Contacts</a>-->
+    <a href="{%url 'upload:Contacts'%}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-address-book fa-fw"></i>  Contacts</a>
+    <a href="{%url 'upload:add_file'%}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus fa-fw"></i>Folder</a>
+<!--     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>-->
+
+  </div>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:310px;margin-top:43px;">
+<br>
+<div class="clearfix">
+
+	<a class="btn btn-info left" href="{% url 'cal:calendar' %}?{{ prev_month }}"> Previous Month </a>
+	{% now "Y-m-d" as todays_date %}
+<!--	{{ checkin_date.start_time|date:'Y-m-d' }} {{ todays_date }}{{ checkin_date.user }} -->
+	{% if checkin_date.start_time|date:'Y-m-d' != todays_date %}
+	   <a class="btn btn-info left" href="{% url 'cal:check_in' %}?{{ prev_month }}"> check in </a>
+	{% elif checkin_date.end_time|date:'Y-m-d' != todays_date %}
+	   <a class="btn btn-info left" href="{% url 'cal:check_out' checkin_date.id %}"> check out </a>
+	   {% else %}
+	   <a > Your attendance is marked for today</a>
+	{% endif %}
+	<a class="btn btn-info right" href="{% url 'cal:calendar' %}?{{ next_month }}"> Next Month </a>
+	<a class="btn btn-info right" href="{% url 'cal:event_new' %}"> Leave request </a>
+
+</div>
+
+
+
+
+{{ calendar }}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+<script>
+
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
+
+
+
+  {% block script %}
+  {% endblock %}
+</div>
+
+</body>
+
+</html>
+
